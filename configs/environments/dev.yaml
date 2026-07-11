@@ -1,0 +1,25 @@
+environment: development
+
+log_level: INFO
+
+minio:
+
+  endpoint: localhost:9000
+
+  access_key: minioadmin
+
+  secret_key: minioadmin
+
+  bucket: enterprise-platform
+
+postgres:
+
+  host: localhost
+
+  port: 5432
+
+  database: enterprise_platform
+
+  user: postgres
+
+  password: postgres

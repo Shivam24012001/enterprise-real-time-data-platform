@@ -1,0 +1,37 @@
+apis:
+
+  - name: jsonplaceholder
+
+    enabled: true
+
+    base_url: https://jsonplaceholder.typicode.com
+
+    endpoint: /posts
+
+    method: GET
+
+    timeout: 30
+
+    retries: 3
+
+    output_format: json
+
+    landing_folder: raw/jsonplaceholder/posts
+
+  - name: fakestore
+
+    enabled: false
+
+    base_url: https://fakestoreapi.com
+
+    endpoint: /products
+
+    method: GET
+
+    timeout: 30
+
+    retries: 3
+
+    output_format: json
+
+    landing_folder: raw/fakestore/products
