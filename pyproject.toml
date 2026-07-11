@@ -1,0 +1,22 @@
+[project]
+name = "enterprise-platform"
+version = "0.1.0"
+description = "Enterprise Real-Time Data Engineering Platform"
+authors = [
+    {name = "Shivam Mishra"}
+]
+license = "MIT"
+requires-python = ">=3.12,<4.0"
+dependencies = [
+    "pandas (>=3.0.3,<4.0.0)",
+    "requests (>=2.34.2,<3.0.0)",
+    "aiohttp (>=3.14.1,<4.0.0)",
+    "pydantic (>=2.13.4,<3.0.0)",
+    "python-dotenv (>=1.2.2,<2.0.0)",
+    "loguru (>=0.7.3,<0.8.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
