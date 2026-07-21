@@ -1,5 +1,4 @@
 apis:
-
   - name: jsonplaceholder
 
     enabled: true
