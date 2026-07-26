@@ -2,7 +2,11 @@ from pathlib import Path
 
 import yaml
 
-from enterprise_platform.ingestion.models import APICollection, EnvironmentConfig
+from enterprise_platform.ingestion.models import (
+    APICollection,
+    APIConfig,
+    EnvironmentConfig,
+)
 
 
 class ConfigLoader:
@@ -32,3 +36,12 @@ class ConfigLoader:
             data = yaml.safe_load(file)
 
         return EnvironmentConfig(**data)
+
+    def get_enabled_apis(self) -> list[APIConfig]:
+        """
+        Return all APIs that are enabled.
+        """
+
+        api_collection = self.load_api_config()
+
+        return [api for api in api_collection.apis if api.enabled]
