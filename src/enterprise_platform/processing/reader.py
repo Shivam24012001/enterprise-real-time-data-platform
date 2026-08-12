@@ -1,4 +1,5 @@
 from pyspark.sql import DataFrame, SparkSession
+from pyspark.sql.types import StructType
 
 
 class DataFrameReader:
@@ -7,7 +8,17 @@ class DataFrameReader:
     def __init__(self, spark: SparkSession) -> None:
         self.spark = spark
 
-    def read_json(self, file_path: str) -> DataFrame:
+    def read_json(
+        self,
+        file_path: str,
+        schema: StructType | None = None,
+        mode: str = "FAILFAST",
+    ) -> DataFrame:
         """Read Json file into Spark Dataframe"""
 
-        return self.spark.read.option("Multiline", True).json(file_path)
+        reader = self.spark.read.option("multiline", True)
+
+        if schema is not None:
+            reader = reader.schema(schema)
+
+        return reader.json(file_path)

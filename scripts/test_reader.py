@@ -1,4 +1,5 @@
 from enterprise_platform.processing.reader import DataFrameReader
+from enterprise_platform.processing.schemas import POST_SCHEMA
 from enterprise_platform.processing.spark_session import SparkSessionFactory
 
 
@@ -8,19 +9,18 @@ def main() -> None:
 
     reader = DataFrameReader(spark)
 
-    df = reader.read_json("data/raw/sample/posts_20260726_162513.json")
+    print("\n========== USING EXPLICIT SCHEMA ==========\n")
 
-    print("\nSchema\n")
+    df = reader.read_json(
+        "data/raw/sample/posts_invalid.json",
+        schema=POST_SCHEMA,
+    )
 
     df.printSchema()
 
-    print("\nSample Data\n")
-
     df.show(5, truncate=False)
 
-    print("\nRecord Count")
-
-    print(df.count())
+    print("\nRecord Count:", df.count())
 
     spark.stop()
 
