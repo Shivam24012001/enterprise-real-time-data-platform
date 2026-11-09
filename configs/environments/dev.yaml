@@ -6,10 +6,6 @@ minio:
 
   endpoint: localhost:9000
 
-  access_key: minioadmin
-
-  secret_key: minioadmin
-
   bucket: enterprise-platform
 
 postgres:
@@ -20,6 +16,4 @@ postgres:
 
   database: enterprise_platform
 
-  user: postgres
 
-  password: postgres

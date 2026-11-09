@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import UTC, datetime
 
 from pydantic import BaseModel, Field
 
@@ -85,7 +85,7 @@ class IngestionResult(BaseModel):
     object_key: str = Field(description="Object key where the data was uploaded.")
 
     ingestion_timestamp: datetime = Field(
-        default_factory=datetime.utcnow,
+        default_factory=lambda: datetime.now(UTC),
         description="Timestamp when ingestion completed.",
     )
 

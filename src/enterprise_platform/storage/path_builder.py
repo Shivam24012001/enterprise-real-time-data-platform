@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import UTC, datetime
 
 
 class PathBuilder:
@@ -14,7 +14,7 @@ class PathBuilder:
         Example:
         raw/jsonplaceholder/posts/year=2026/month=07/day=24/posts_20260724_214530.json
         """
-        now = datetime.utcnow()
+        now = datetime.now(UTC)
         year = now.strftime("%Y")
         month = now.strftime("%m")
         day = now.strftime("%d")

@@ -7,6 +7,7 @@ from enterprise_platform.ingestion.models import (
     APIConfig,
     EnvironmentConfig,
 )
+from enterprise_platform.ingestion.settings import Secrets
 
 
 class ConfigLoader:
@@ -25,15 +26,24 @@ class ConfigLoader:
 
         return APICollection(**data)
 
+
+
     def load_environment(
         self,
         environment: str = "dev",
+        secrets: Secrets | None = None,
     ) -> EnvironmentConfig:
 
         env_file = self.config_directory / "environments" / f"{environment}.yaml"
 
         with env_file.open("r", encoding="utf-8") as file:
             data = yaml.safe_load(file)
+
+        secrets = secrets or Secrets()
+        data["minio"]["access_key"] = secrets.minio_root_user
+        data["minio"]["secret_key"] = secrets.minio_root_password
+        data["postgres"]["user"] = secrets.postgres_user
+        data["postgres"]["password"] = secrets.postgres_password
 
         return EnvironmentConfig(**data)
 
