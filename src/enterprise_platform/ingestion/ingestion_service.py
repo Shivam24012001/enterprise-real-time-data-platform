@@ -6,7 +6,6 @@ from enterprise_platform.storage.uploader import Uploader
 
 
 class IngestionService:
-
     def __init__(self, api_config, environment):
         self.api_config = api_config
         self.environment = environment

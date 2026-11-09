@@ -1,4 +1,5 @@
 from pyspark.sql import DataFrame
+import pytest
 
 from enterprise_platform.processing.quality.quality_report import (
     QualityReport,
@@ -7,17 +8,17 @@ from enterprise_platform.processing.quality.quality_report import (
 
 class DataQualityValidator:
     """Reusable data quality checks for spark DataFrame.
-    Column match is exact and case sensitive: bronze keep source name. """
+    Column match is exact and case sensitive: bronze keep source name."""
 
     def __init__(self, dataframe: DataFrame) -> None:
         self.dataframe = dataframe
-        self._available=set(dataframe.columns)
+        self._available = set(dataframe.columns)
 
-    def split_columns(self,columns:list[str])->tuple[list[str],list[str]]:
+    def split_columns(self, columns: list[str]) -> tuple[list[str], list[str]]:
         """Return (present, missing), keeping input order and dropping repeats."""
-        seen:set[str]=set()
-        present:list[str]=[]
-        missing:list[str]=[]
+        seen: set[str] = set()
+        present: list[str] = []
+        missing: list[str] = []
         for column in columns:
             if column in seen:
                 continue
@@ -28,19 +29,18 @@ class DataQualityValidator:
             else:
                 missing.append(column)
 
-        return present,missing
-
+        return present, missing
 
     def validate_required_columns(self, required_column: list[str]) -> list[str]:
 
-        _,missing=self.split_columns(required_column)
+        _, missing = self.split_columns(required_column)
         return missing
 
     def validate_nulls(self, columns: list[str]) -> dict[str, int]:
         """Return the number of NULL values for each specified columns"""
 
         null_counts: dict[str, int] = {}
-        present,_=self.split_columns(columns)
+        present, _ = self.split_columns(columns)
 
         for column in present:
             null_count = self.dataframe.filter(self.dataframe[column].isNull()).count()
@@ -56,9 +56,7 @@ class DataQualityValidator:
         if missing:
             return None
 
-
         total_counts = self.dataframe.count()
-
 
         unique_count = self.dataframe.select(*present).distinct().count()
 
@@ -78,9 +76,9 @@ class DataQualityValidator:
         total_records = self.dataframe.count()
 
         has_nulls = any(count > 0 for count in null_counts.values())
-        duplicates_failed=duplicate_count is None or duplicate_count>0
+        duplicates_failed = duplicate_count is None or duplicate_count > 0
 
-        if missing_columns or has_nulls or duplicates_failed :
+        if missing_columns or has_nulls or duplicates_failed:
             status = "FAIL"
         else:
             status = "PASS"

@@ -21,7 +21,7 @@ def main() -> None:
 
     required_columns = [
         "id",
-        "user_Id",
+        "userId",
         "title",
         "body",
     ]
