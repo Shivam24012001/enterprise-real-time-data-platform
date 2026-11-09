@@ -26,8 +26,6 @@ class ConfigLoader:
 
         return APICollection(**data)
 
-
-
     def load_environment(
         self,
         environment: str = "dev",
