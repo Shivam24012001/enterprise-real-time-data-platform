@@ -4,7 +4,6 @@ from enterprise_platform.ingestion.models import MinIOConfig
 
 
 class MinIOClient:
-
     def __init__(self, config: MinIOConfig) -> None:
         self.config = config
         self.client = Minio(
