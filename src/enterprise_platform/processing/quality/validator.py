@@ -1,5 +1,4 @@
 from pyspark.sql import DataFrame
-import pytest
 
 from enterprise_platform.processing.quality.quality_report import (
     QualityReport,

@@ -1,3 +1,4 @@
+from loguru import logger
 from minio import Minio
 
 from enterprise_platform.ingestion.models import MinIOConfig
@@ -31,6 +32,6 @@ class MinIOClient:
         """
         if not self.bucket_exists(bucket_name):
             self.client.make_bucket(bucket_name)
-            print(f"Bucket '{bucket_name}' created successfully.")
+            logger.info(f"Bucket '{bucket_name}' created successfully.")
         else:
-            print(f"Bucket '{bucket_name}' already exists.")
+            logger.info(f"Bucket '{bucket_name}' already exists.")

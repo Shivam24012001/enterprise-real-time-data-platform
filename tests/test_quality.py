@@ -48,4 +48,4 @@ def test_column_match_is_case_sensitive(spark):
         required_columns=["id", "userid"], key_columns=["id"]
     )
 
-    assert "userid"  in report.missing_columns
+    assert "userid" in report.missing_columns

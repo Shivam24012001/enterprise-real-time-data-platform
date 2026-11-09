@@ -24,7 +24,7 @@ class MinIOConfig(BaseModel):
     bucket: str
 
 
-class PostgresCofig(BaseModel):
+class PostgresConfig(BaseModel):
     host: str
     port: int
     database: str
@@ -36,4 +36,4 @@ class EnvironmentConfig(BaseModel):
     environment: str
     log_level: str
     minio: MinIOConfig
-    postgres: PostgresCofig
+    postgres: PostgresConfig

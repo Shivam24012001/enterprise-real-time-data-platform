@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import UTC, datetime
 
 from pydantic import BaseModel, Field
 
@@ -10,4 +10,4 @@ class IngestionResult(BaseModel):
     bucket_name: str
     object_key: str
 
-    ingestion_timestamp: datetime = Field(default_factory=datetime.utcnow)
+    ingestion_timestamp: datetime = Field(default_factory=lambda: datetime.now(UTC))
