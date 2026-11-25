@@ -14,6 +14,8 @@ def write_jsonl(path, lines):
 
 
 def test_one_bad_row_is_quarantined_and_the_rest_continue(spark, tmp_path):
+    schema=POST_SCHEMA,
+    multiline=True,
     lines = [GOOD % i for i in range(1, 5)] + [BROKEN]
     source = write_jsonl(tmp_path / "posts.jsonl", lines)
     quarantine_dir = tmp_path / "quarantine"
