@@ -14,6 +14,7 @@ def main() -> None:
     df = reader.read_json(
         "data/raw/sample/posts_invalid.json",
         schema=POST_SCHEMA,
+        multiline=True,
     )
 
     df.printSchema()
